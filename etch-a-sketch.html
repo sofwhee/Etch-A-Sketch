@@ -10,6 +10,15 @@
   <body>
 
 		<script>
+      const gridContainerDiv = document.createElement('div');
+      gridContainerDiv.id = "gridContainer"
+      document.querySelector('body').appendChild(gridContainerDiv);
+
+      const gridDiv = document.createElement('div');
+      gridDiv.class = "gridSquare"
+      for (let i = 16; i != 0; i--) {
+        document.querySelector("#gridContainer").appendChild(gridDiv)
+      }
 
 		</script>
 	</body>
