@@ -16,11 +16,17 @@
     gridContainerDiv.id = "gridContainer";
     document.querySelector('body').appendChild(gridContainerDiv);
 
-    for (let i = 0; i < 16; i++) {
-      for (let i = 0; i < 16; i++) {
+    for (let row = 0; row < 16; row++) {
+      
+      const gridLineDiv = document.createElement('div')
+      gridLineDiv.className = 'gridLine'
+      gridLineDiv.id = `gridLine${row}`
+      document.querySelector('#gridContainer').appendChild(gridLineDiv)
+
+      for (let column = 0; column < 16; column++) {
         const gridDiv = document.createElement('div');
         gridDiv.className = "gridSquare";
-        document.querySelector("#gridContainer").appendChild(gridDiv);
+        document.querySelector(`#gridLine${row}`).appendChild(gridDiv);
         console.log("Added");
       }
     }
