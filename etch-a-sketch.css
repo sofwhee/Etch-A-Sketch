@@ -1,16 +1,13 @@
 body {
-	margin: 0;
-	height: 100vh;
-	width: 100vh;
+
 }
 
 #gridContainer {
-	display:	block;
-	white-space: nowrap;
+
 }
 
 .gridLine {
-	display:	inline-block;
+
 }
 
 .gridSquare {
