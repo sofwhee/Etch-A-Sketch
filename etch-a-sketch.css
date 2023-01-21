@@ -2,9 +2,12 @@ body {
 }
 
 #gridContainer {
+	display:	block;
+	white-space: nowrap;
 }
 
 .gridLine {
+	display:	inline-block;
 }
 
 .gridSquare {
