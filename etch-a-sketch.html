@@ -26,17 +26,14 @@
 
     function colorChanger(elToChange) {
       elToChange.classList.add('colouredGrid')
-      console.log('Added color')
     }
 
     function colorReverter(elToChange) {
       elToChange.classList.remove('colouredGrid')
-      console.log('Removed color')
     }
 
     const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
     gridSquareArray.forEach((element) => {
-      console.log(element)
       element.addEventListener('mouseenter', colorChanger.bind(null, element))
       element.addEventListener('mouseout', colorReverter.bind(null, element))
     })
