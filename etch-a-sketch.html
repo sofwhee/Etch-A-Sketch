@@ -9,46 +9,65 @@
   </head>
 
   <body></body>
-  <button></button>
+  <button>"Choose grid size.</button>
 
   <script>
 
+    const gridContainerDiv = document.createElement('div');
+    gridContainerDiv.id = "gridContainer";
+    document.querySelector('body').appendChild(gridContainerDiv);
+    const gridContainer = document.querySelector('#gridContainer');
+
     function createGrid (gridSize = 16) {
-      const gridContainerDiv = document.createElement('div');
-      gridContainerDiv.id = "gridContainer";
-      document.querySelector('body').appendChild(gridContainerDiv);
 
       for (let row = 0; row < gridSize; row++) {
         for (let column = 0; column < gridSize; column++) {
           const gridDiv = document.createElement('div');
           gridDiv.className = "gridSquare";
-          document.querySelector('#gridContainer').appendChild(gridDiv);
+          gridContainer.appendChild(gridDiv);
         }
       }
 
       function colorChanger(elToChange) {
-        elToChange.classList.add('colouredGrid')
+        elToChange.classList.add('colouredGrid');
       }
 
       function colorReverter(elToChange) {
-        elToChange.classList.remove('colouredGrid')
+        elToChange.classList.remove('colouredGrid');
       }
 
-      const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
+      const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'));
       gridSquareArray.forEach((element) => {
         element.addEventListener('mouseenter', colorChanger.bind(null, element))
         element.addEventListener('mouseout', colorReverter.bind(null, element))
-      })
+      });
+
+      // const gridCSS = {
+      //   grid:                "display",
+      //   gridTemplateColumns: `repeat(${gridSize}, ${100 / gridSize}vw)`,
+      //   gridTemplateRows:    `repeat(${gridSize}, ${100 / gridSize}vh)`
+      // }
+
+      // gridContainer.assign(gridCSS)
+      
+      gridContainer.style.display =                "grid";
+      gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${100 / gridSize}vw)`;
+      gridContainer.style.gridTemplateRows =    `repeat(${gridSize}, ${100 / gridSize}vh)`;
+    }
+
+    function removeGrid() {
+      gridContainer.innerHTML = '';
+    }
+
+    function createGridPrompt() {
+      removeGrid()
+      createGrid(prompt("Please enter a number. This will determine the density of your drawing grid. Ex: Enter 64 for a 64x64 grid. Note: 100 is the maximum value allowed."));
     }
 
     createGrid()
 
-    function createGridPrompt() {
-      createGrid(prompt("Please enter a number. This will determine the density of your drawing grid. Ex: Enter 64 for a 64x64 grid. Note: 100 is the maximum value allowed."))
-    }
-
-    sizeButton = document.querySelector('button')
-    sizeButton.addEventListener('click', createGridPrompt)
+    sizeButton = document.querySelector('button');
+    sizeButton.addEventListener('click', createGridPrompt);
 
   </script>
 
