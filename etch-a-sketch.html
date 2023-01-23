@@ -9,34 +9,46 @@
   </head>
 
   <body></body>
+  <button></button>
 
   <script>
 
-    const gridContainerDiv = document.createElement('div');
-    gridContainerDiv.id = "gridContainer";
-    document.querySelector('body').appendChild(gridContainerDiv);
+    function createGrid (gridSize = 16) {
+      const gridContainerDiv = document.createElement('div');
+      gridContainerDiv.id = "gridContainer";
+      document.querySelector('body').appendChild(gridContainerDiv);
 
-    for (let row = 0; row < 16; row++) {
-      for (let column = 0; column < 16; column++) {
-        const gridDiv = document.createElement('div');
-        gridDiv.className = "gridSquare";
-        document.querySelector('#gridContainer').appendChild(gridDiv);
+      for (let row = 0; row < gridSize; row++) {
+        for (let column = 0; column < gridSize; column++) {
+          const gridDiv = document.createElement('div');
+          gridDiv.className = "gridSquare";
+          document.querySelector('#gridContainer').appendChild(gridDiv);
+        }
       }
+
+      function colorChanger(elToChange) {
+        elToChange.classList.add('colouredGrid')
+      }
+
+      function colorReverter(elToChange) {
+        elToChange.classList.remove('colouredGrid')
+      }
+
+      const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
+      gridSquareArray.forEach((element) => {
+        element.addEventListener('mouseenter', colorChanger.bind(null, element))
+        element.addEventListener('mouseout', colorReverter.bind(null, element))
+      })
     }
 
-    function colorChanger(elToChange) {
-      elToChange.classList.add('colouredGrid')
+    createGrid()
+
+    function createGridPrompt() {
+      createGrid(prompt("Please enter a number. This will determine the density of your drawing grid. Ex: Enter 64 for a 64x64 grid. Note: 100 is the maximum value allowed."))
     }
 
-    function colorReverter(elToChange) {
-      elToChange.classList.remove('colouredGrid')
-    }
-
-    const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
-    gridSquareArray.forEach((element) => {
-      element.addEventListener('mouseenter', colorChanger.bind(null, element))
-      element.addEventListener('mouseout', colorReverter.bind(null, element))
-    })
+    sizeButton = document.querySelector('button')
+    sizeButton.addEventListener('click', createGridPrompt)
 
   </script>
 
