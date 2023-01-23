@@ -30,13 +30,23 @@
         }
       }
 
+      function randColor() {
+        let r = Math.floor(Math.random() * 256)
+        let g = Math.floor(Math.random() * 256)
+        let b = Math.floor(Math.random() * 256)
+        let a = Math.floor(Math.random())
+        return (r, g, b, a)
+      }
+
       function colorChanger(elToChange) {
-        elToChange.classList.add('colouredGrid');
+        // elToChange.classList.add('colouredGrid');
+        elToChange.style.backgroundColor = `rgba(${randColor})`
 
       }
 
       function colorReverter(elToChange) {
-        elToChange.classList.remove('colouredGrid');
+        // elToChange.classList.remove('colouredGrid');
+        elToChange.style.backgroundColor = "white"
       }
 
       const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'));
