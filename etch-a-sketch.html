@@ -35,8 +35,8 @@
 
     const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
     gridSquareArray.forEach((element) => {
-      element.addEventListener('mouseenter', colorChanger)
-      element.addEventListener('mouseout', colorReverter)
+      element.addEventListener('mouseenter', colorChanger(element))
+      element.addEventListener('mouseout', colorReverter(element))
     })
 
   </script>
