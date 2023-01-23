@@ -6,8 +6,6 @@ body {
 	display: grid;
 	grid-template-columns: repeat(16, 6.25vh);
 	grid-template-rows: repeat(16, 6.25vh);
-	padding-right: 2.5px;
-	padding-bottom: 2.5px;
 }
 
 /* .gridLine {	
