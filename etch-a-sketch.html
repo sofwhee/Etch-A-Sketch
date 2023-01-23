@@ -25,6 +25,20 @@
       }
     }
 
+    function colorChanger(elToChange) {
+      elToChange.classList.add('colouredGrid')
+    }
+
+    function colorReverter(elToChange) {
+      elToChange.classList.remove('colouredGrid')
+    }
+
+    const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'))
+    gridSquareArray.foreach((element) => {
+      element.addEventListener('mouseenter', colorChanger)
+      element.addEventListener('mouseout', colorReverter)
+    })
+
   </script>
 
 	</html>

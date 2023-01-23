@@ -8,9 +8,10 @@ body {
 	grid-template-rows: repeat(16, 6.25vh);
 }
 
-/* .gridLine {	
-} */
-
 .gridSquare {
 	border: 1px solid red;
+}
+
+.colouredGrid {
+	color: black;
 }
