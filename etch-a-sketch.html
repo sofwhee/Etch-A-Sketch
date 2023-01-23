@@ -9,7 +9,7 @@
   </head>
 
   <body></body>
-  <button>"Choose grid size.</button>
+  <button>Choose grid size</button>
 
   <script>
 
@@ -19,6 +19,8 @@
     const gridContainer = document.querySelector('#gridContainer');
 
     function createGrid (gridSize = 16) {
+
+      if (gridSize == null) {gridSize = 16}
 
       for (let row = 0; row < gridSize; row++) {
         for (let column = 0; column < gridSize; column++) {
