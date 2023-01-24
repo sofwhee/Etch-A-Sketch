@@ -27,14 +27,11 @@
       // force it to behave like rgba
 
       if (rgbaInput.search('rgba') == -1) {
-        console.log(`rgbaInput before is ` + rgbaInput)
         rgbaInput = rgbaInput.replace('rgb', 'rgba')
         rgbaInput = rgbaInput.replace(')', ', 1)')
-        console.log(`rgbaInput now is ` + rgbaInput)
       }
 
       rgbaInput = rgbaInput.slice(5);  // remove 'rgba(' string
-      console.log(rgbaInput)
 
       let returnRgba = [];
       let rgbaStr = 'rgba';
@@ -45,7 +42,6 @@
         rgbaInput = rgbaInput.slice(colorInt.length +2);
         
         returnRgba.push(colorInt);
-        console.log(`${rgbaStr[i]} is ${colorInt}`);
       }
       return returnRgba;
     }
@@ -60,30 +56,23 @@
           returnRgba.push(newCol);
           continue
         }
-        console.log(`newCol before sub ` + newCol)
         if (newCol > 0) {newCol -= 26};
-        console.log(`newCol after sub ` + newCol)
-        if (newCol < 0) {newCol = 0}; // problem?
-        console.log(`newCol after 0 check ` + newCol)
+        if (newCol < 0) {newCol = 0};
 
         returnRgba.push(newCol);
       }
 
       // for alpha channel...
       if (rgbaArray.length == 4) {
-        console.log(`alpha before darken ` + rgbaArray[3])
 
         let alpha = rgbaArray[3] * 1000
         alpha += 100
         if (alpha > 1000) {alpha = 1000}
         alpha /= 1000
 
-        console.log(`alpha after darken ` + alpha)
-
         returnRgba.push(alpha)
       }
 
-      console.log(`rgbaDarken return is ${returnRgba}`);
       return returnRgba;
 
     }
@@ -102,15 +91,11 @@
         bgColor = `rgba(${bgColor})`;
         
         elToChange.style.backgroundColor = bgColor;
-
-        console.log(bgColor);
-        console.log(elToChange.style.backgroundColor);
         
       } else {
 
         elToChange.style.backgroundColor = `rgba(${String(randColor())})`;
-        console.log(`first time color ${elToChange.style.backgroundColor}`);
-
+        
       }
     }
 
