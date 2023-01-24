@@ -13,6 +13,87 @@
 
   <script>
 
+    function randColor() {
+      let r = Math.floor(Math.random() * 256);
+      let g = Math.floor(Math.random() * 256);
+      let b = Math.floor(Math.random() * 256);
+      let a = Math.random();
+      return [r, g, b, a];
+    }
+
+    function rgbaStrip(rgbaInput) {
+
+      rgbaInput = rgbaInput.slice(5);  // remove 'rgba(' string
+      let returnRgba = [];
+      let rgbaStr = 'rgba';
+
+      for (let i = 0; i < rgbaInput.length - 1; i++) {
+
+        let colorInt = rgbaInput.slice(0, (rgbaInput.search(',')));
+        rgbaInput = rgbaInput.slice(colorInt.length +1);
+        
+        returnRgba.push(colorInt);
+        console.log(`${rgbaStr[i]} is ${colorInt}`);
+      }
+      return returnRgba;
+    }
+
+    function rgbaDarken(rgbaArray) {
+
+      let returnRgba = [];
+
+      for (let i = 0; i < 3; i++) {
+        newCol = parseInt(rgbaArray[i]) + 26;
+        if (newCol > 255) {newCol = 255}; // problem?
+        returnRgba.push(newCol.toString());
+      }
+
+      // for alpha channel...
+      if (rgbaArray.length == 4) {
+        let alpha = rgbaArray[3] * 1000
+        alpha += 100
+        if (alpha >= 1000) {alpha = 999}
+        alpha /= 1000
+        console.log(alpha)
+      }
+
+      console.log(`rgbaDarken return is ${returnRgba}`);
+      return returnRgba;
+
+    }
+
+    function colorChanger(elToChange) {
+
+      // old method
+      // elToChange.classList.add('colouredGrid');
+
+      if (elToChange.style.backgroundColor) {
+
+        let bgColor = elToChange.style.backgroundColor;
+        let bgColorArray = rgbaStrip(bgColor);
+
+        bgColor = rgbaDarken(bgColorArray);
+        bgColor = `rgba(${bgColor})`;
+        
+        elToChange.style.backgroundColor = bgColor;
+
+        console.log(bgColor);
+        console.log(elToChange.style.backgroundColor);
+        
+      } else {
+
+        elToChange.style.backgroundColor = `rgba(${String(randColor())})`;
+        console.log(`first time color ${elToChange.style.backgroundColor}`);
+
+      }
+    }
+
+    // function colorReverter(elToChange) {
+    //   // elToChange.classList.remove('colouredGrid');
+    //   elToChange.style.backgroundColor = "white"
+    // }
+
+    // build grid container
     const gridContainerDiv = document.createElement('div');
     gridContainerDiv.id = "gridContainer";
     document.querySelector('body').appendChild(gridContainerDiv);
@@ -30,38 +111,11 @@
         }
       }
 
-      function randColor() {
-        let r = Math.floor(Math.random() * 256)
-        let g = Math.floor(Math.random() * 256)
-        let b = Math.floor(Math.random() * 256)
-        let a = Math.floor(Math.random())
-        return (r, g, b, a)
-      }
-
-      function colorChanger(elToChange) {
-        // elToChange.classList.add('colouredGrid');
-        elToChange.style.backgroundColor = `rgba(${randColor})`
-
-      }
-
-      function colorReverter(elToChange) {
-        // elToChange.classList.remove('colouredGrid');
-        elToChange.style.backgroundColor = "white"
-      }
-
       const gridSquareArray = Array.from(document.querySelectorAll('.gridSquare'));
       gridSquareArray.forEach((element) => {
-        element.addEventListener('mouseenter', colorChanger.bind(null, element))
-        element.addEventListener('mouseout', colorReverter.bind(null, element))
+        element.addEventListener('mouseenter', colorChanger.bind(null, element));
+        // element.addEventListener('mouseout', colorReverter.bind(null, element))
       });
-
-      // const gridCSS = {
-      //   grid:                "display",
-      //   gridTemplateColumns: `repeat(${gridSize}, ${100 / gridSize}vw)`,
-      //   gridTemplateRows:    `repeat(${gridSize}, ${100 / gridSize}vh)`
-      // }
-
-      // gridContainer.assign(gridCSS)
       
       gridContainer.style.display =                "grid";
       gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, ${100 / gridSize}vw)`;
@@ -76,6 +130,8 @@
       removeGrid()
       createGrid(prompt("Please enter a number. This will determine the density of your drawing grid. Ex: Enter 64 for a 64x64 grid. Note: 100 is the maximum value allowed."));
     }
+
+    // Actual program
 
     createGrid()
 
